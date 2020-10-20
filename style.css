@@ -1,0 +1,123 @@
+body {
+    background-color: #e7e7e7;
+}
+
+li {
+    position: relative;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    width: 95%;
+    height: 100%;
+    background-color: white;
+    list-style: none;
+    display: flex;
+}
+
+.img-Doctor {
+    padding: 15px;
+    width: 230px;
+    height: 230px;
+}
+
+h2 {
+    text-decoration: underline;
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 20px;
+    color: gray;
+}
+
+h4 {
+    padding-top: 35px;
+    font-size: 18px;
+}
+
+.Doctor-DIV {
+    padding-top: 15px;
+}
+
+.btn-info {
+    position: absolute;
+    height: 20%;
+    right: 20px;
+    bottom: 20px;
+}
+
+.btn-success {
+    right: 70px;
+    position: absolute;
+    top: 185px;
+}
+
+.form-group {
+    padding-top: 30px;
+    width: 80%;
+    padding-left: 40px;
+    width: 95%;
+}
+
+h1 {
+    position: relative;
+    text-align: center;
+    top: 0px;
+    background-color: rgb(58, 131, 190);
+    color: white;
+    padding-bottom: 10px;
+}
+
+.h2-Doctor {
+    text-decoration: none;
+}
+
+span {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    left: 20px;
+    padding-top: 15px;
+    background-color: #efefef;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 150px;
+    height: 80px;
+}
+
+span p {
+    display: block;
+    color: black;
+}
+
+.div-opening-hours-1 {
+    padding-top: 20px;
+}
+
+.h2-opening-hours, .h2-adress {
+    padding-top: 30px;
+    padding-left: 30px;
+    text-decoration: none;
+}
+
+.div-opening-hours-2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.li-opening-hours, .li-adress {
+    display: inherit;
+}
+
+.btn-primary{
+    position: absolute;
+    left: 40px;
+}
+
+.btn-next-doctor{
+    position: absolute;
+    left: 1100px;
+}
