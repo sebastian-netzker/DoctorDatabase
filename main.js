@@ -12,11 +12,18 @@ let list4;
 
 let list5;
 
+/**
+ * This function open the Main Menu
+ */
+
 function openMainMenu(){
   location.href="index.html";
 }
 
 
+/**
+ * This function load the onclick function for the buttons
+ */
 
 
 function loadButtons(){
@@ -205,6 +212,11 @@ function createAllDoctorLists(){
 
 
 
+
+/**
+ * This function create a list for the first doctor
+ */
+
 function DoctorList1() { 
   
   DoctorList = createDoctorList(
@@ -224,6 +236,10 @@ function DoctorList1() {
 }
 
 
+/**
+ * This function create a list for the second doctor
+ */
+
 function DoctorList2() {
 
   DoctorList = createDoctorList(
@@ -239,6 +255,10 @@ function DoctorList2() {
   );
    list2.insertAdjacentHTML("beforeend", DoctorList);
 }
+
+/**
+ * This function create a list for the third doctor
+ */
 
 function DoctorList3() {
   i = 2;
@@ -256,6 +276,10 @@ function DoctorList3() {
    list3.insertAdjacentHTML("beforeend", DoctorList);
 }
 
+/**
+ * This function create a list for the fourth doctor
+ */
+
 function DoctorList4() {
   i = 3;
   DoctorList = createDoctorList(
@@ -271,6 +295,10 @@ function DoctorList4() {
   );
    list4.insertAdjacentHTML("beforeend", DoctorList);
 }
+
+/**
+ * This function create a list for the fifth doctor
+ */
 
 function DoctorList5() {
   
@@ -288,7 +316,9 @@ function DoctorList5() {
    list5.insertAdjacentHTML("beforeend", DoctorList);
 }
 
-
+/**
+ * This function create the DoctorList, which one is used to create the individual list for the different doctors
+ */
 
 
 
@@ -318,7 +348,7 @@ function createDoctorList(picture_url ,title, first_name, last_name, specialitie
 
 
 /**
- * Loads myJSON from Server
+ * Load AllDoctorList - JSON from Server
  */
 function load() {
   loadJSONFromServer()
