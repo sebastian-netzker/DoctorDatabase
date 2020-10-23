@@ -25,7 +25,7 @@
                     <label for="exampleFormControlSelect1">
                         <h3>Ärzte nach Fachgebiet</h3>
                     </label>
-                    <select class="form-control" id="select-menu">
+                    <select onchange="updateResults()" class="form-control" id="select-menu">
                         <option>Alle Fachgebiete</option>
                         <option>Allgemeinmedizin</option>
                         <option>Dermatologie</option>
@@ -33,9 +33,6 @@
                         <option>Radiologie</option>
                         <option>Zahnmedizin</option>
                     </select>
-
-                    <button onclick="selector() " type="button" class="btn btn-success">Bestätigen</button>
-
                     
                 </div>
 

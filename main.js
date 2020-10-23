@@ -12,6 +12,91 @@ let list4;
 
 let list5;
 
+
+/**
+ * This function create parameter after the existing url
+ */
+function loadDoctor(){
+
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const id = urlParams.get('id');
+
+doctor = infoDoctor.find(doc => doc.id == id);
+
+doctor = infoDoctor.find(function(doc){
+
+  return doc.id == id;
+
+});
+
+displayDoctorInfoOnPage(id);    
+
+}
+
+
+/**
+ * This function shows the respective doctor
+ * @param {number} id - number, who check which doctor is selected
+ */
+function displayDoctorInfoOnPage(id){
+
+  
+  if(id == 1){
+  document.getElementById("doctor-anton_kraus").classList.remove("d-none");
+
+  document
+    .getElementById("anton_kraus-opening_hours")
+    .classList.remove("d-none");}
+
+  else if(id == 2 ) {
+    document.getElementById("doctor-christina_miller").classList.remove("d-none");
+
+    document
+      .getElementById("christina_miller-opening_hours")
+      .classList.remove("d-none");
+
+  } else if(id == 3){
+    document.getElementById("doctor-eberhard_oldenberger").classList.remove("d-none");
+
+    document
+      .getElementById("eberhard_oldenberger-opening_hours")
+      .classList.remove("d-none");
+
+  }else if(id == 4){
+    document.getElementById("doctor-klara_weber").classList.remove("d-none");
+
+    document
+      .getElementById("klara_weber-opening_hours")
+      .classList.remove("d-none");
+
+  } else if (id == 5){
+    document.getElementById("doctor-sonja_huber").classList.remove("d-none");
+
+    document
+      .getElementById("sonja_huber-opening_hours")
+      .classList.remove("d-none");
+
+  }
+
+}
+
+
+
+/**
+ * This function add parameter after the url 
+ * @param {number} id - number, for the different doctors
+ */
+
+
+function openProfile(id) {
+  window.location.href= './profile.html?id=' +id;
+
+
+}
+
+
 /**
  * This function open the Main Menu
  */
@@ -29,23 +114,25 @@ function openMainMenu(){
 function loadButtons(){
 
   document.getElementById("btn-0").onclick = function () {
-    location.href = "Anton_Kraus.html";
+    openProfile(1);
+
+    
   };
 
   document.getElementById("btn-1").onclick = function () {
-    location.href = "Christina_Miller.html";
+  openProfile(2);
   };
 
   document.getElementById("btn-2").onclick = function () {
-    location.href = "Eberhard_Oldenberger.html";
+    openProfile(3);
   };
 
   document.getElementById("btn-3").onclick = function () {
-    location.href = "Klara_Weber.html";
+    openProfile(4);
   };
 
   document.getElementById("btn-4").onclick = function () {
-    location.href = "Sonja-Anette_Huber.html";
+    openProfile(5);
   };
 
 
@@ -60,7 +147,7 @@ function loadButtons(){
  */
 
 
-function selector() {
+function updateResults() {
 
   let select_Menu = document.getElementById("select-menu");
   let selectedValue = select_Menu.options[select_Menu.selectedIndex].value;
@@ -321,11 +408,10 @@ function DoctorList5() {
  */
 
 
-
 function createDoctorList(picture_url ,title, first_name, last_name, specialities, street, zipcode, city,i) {
 
   
-  let DoctorList = `<li>
+  let DoctorList = `<li class="main-menu-list">
       <img class="img-Doctor" src="DoctorDatabase/${picture_url}">
       <div class="Doctor-DIV">
       <h2> ${title + '&nbsp' + first_name + '&nbsp'+ last_name}</h2>
@@ -385,6 +471,7 @@ function loadJSONFromServer() {
         } else {
           reject(xhttp.statusText);
         }
+
       }
     };
 
