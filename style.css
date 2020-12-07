@@ -14,11 +14,8 @@ li {
     display: flex;
 }
 
-.main-menu-list{
-
+.main-menu-list {
     top: 20px;
-
-
 }
 
 .img-Doctor {
@@ -97,6 +94,7 @@ span p {
 
 .div-opening-hours-1 {
     padding-top: 20px;
+    width: 95%;
 }
 
 .h2-opening-hours, .h2-adress {
@@ -124,6 +122,16 @@ span p {
     left: 1100px;
 }
 
+.doctor-info, .opening-hours, .doctor-list{
+    padding-left: 40px;
+}
+
+@media(max-width:825px) {
+    span {
+        height: 95px;
+    }
+}
+
 @media(max-width:700px) {
     h2 {
         font-size: 24px;
@@ -134,52 +142,68 @@ span p {
 }
 
 @media(max-width:600px) {
-
-     h2{
-         font-size: 16px;
-     }
-
-     h3{
-         font-size: 14px;
-     }
-     
-     h4{
-         font-size: 14px;
-
-     }
-
-     .form-group{
-         padding-left: 10px;
-         width: 98%;
-     }
-
+    h2 {
+        font-size: 16px;
+    }
+    h3 {
+        font-size: 14px;
+    }
+    h4 {
+        font-size: 14px;
+    }
+    .form-group {
+        padding-left: 10px;
+        width: 98%;
+    }
     .img-Doctor {
         padding: 15px;
         width: 160px;
         height: 160px;
         object-fit: cover;
     }
-
-    li{
-        left:-30px;
+    li {
+        left: -30px;
         width: 105%;
         height: 170px;
     }
+    .div-opening-hours-1 {
+        padding-top: 10px;
+    }
+    .btn-primary {
+        left: 10px;
+    }
 }
 
-@media(max-width:380px){
-
-    h1{
+@media(max-width:380px) {
+    h1 {
         font-size: 30px;
     }
-
-    h4{
+    h4 {
         display: none;
     }
-
-    button{
+    button {
         font-size: 15px !important;
         right: 40px !important;
     }
-
+    .div-opening-hours-2 {
+        display: inherit;
+        left: 80px;
+        padding-bottom: 10px;
+    }
+    li {
+        height: 100%;
+    }
+    span {
+        left: 20px;
+        width: 90%;
+    }
+    p {
+        margin-top: 10px;
+    }
+    .img-Doctor {
+        height: 180px;
+    }
+    button {
+        bottom: 10px !important;
+    }
 }

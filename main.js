@@ -1,437 +1,240 @@
-const BASE_SERVER_URL = "http://sebastian-netzker.developerakademie.com/Bewerberaufgabe/DoctorDatabase/";
+const BASE_SERVER_URL =
+  "http://sebastian-netzker.developerakademie.com/Bewerberaufgabe/DoctorDatabase/";
 
 let infoDoctor = [];
 
-let list1;
+let specialities = [];
 
-let list2;
-
-let list3;
-
-let list4;
-
-let list5;
-
-
-/**
- * This function create parameter after the existing url
- */
-function loadDoctor(){
-
-
-const urlParams = new URLSearchParams(window.location.search);
-
-const id = urlParams.get('id');
-
-doctor = infoDoctor.find(doc => doc.id == id);
-
-doctor = infoDoctor.find(function(doc){
-
-  return doc.id == id;
-
-});
-
-displayDoctorInfoOnPage(id);    
-
-}
-
-
-/**
- * This function shows the respective doctor
- * @param {number} id - number, who check which doctor is selected
- */
-function displayDoctorInfoOnPage(id){
-
-  
-  if(id == 1){
-  document.getElementById("doctor-anton_kraus").classList.remove("d-none");
-
-  document
-    .getElementById("anton_kraus-opening_hours")
-    .classList.remove("d-none");}
-
-  else if(id == 2 ) {
-    document.getElementById("doctor-christina_miller").classList.remove("d-none");
-
-    document
-      .getElementById("christina_miller-opening_hours")
-      .classList.remove("d-none");
-
-  } else if(id == 3){
-    document.getElementById("doctor-eberhard_oldenberger").classList.remove("d-none");
-
-    document
-      .getElementById("eberhard_oldenberger-opening_hours")
-      .classList.remove("d-none");
-
-  }else if(id == 4){
-    document.getElementById("doctor-klara_weber").classList.remove("d-none");
-
-    document
-      .getElementById("klara_weber-opening_hours")
-      .classList.remove("d-none");
-
-  } else if (id == 5){
-    document.getElementById("doctor-sonja_huber").classList.remove("d-none");
-
-    document
-      .getElementById("sonja_huber-opening_hours")
-      .classList.remove("d-none");
-
-  }
-
-}
+let filteredDoctors;
 
 
 
 /**
- * This function add parameter after the url 
+ * This function add parameter after the url
  * @param {number} id - number, for the different doctors
  */
 
-
 function openProfile(id) {
-  window.location.href= './profile.html?id=' +id;
-
-
+  window.location.href = "./profile.html?id=" + id;
 }
-
 
 /**
  * This function open the Main Menu
  */
 
-function openMainMenu(){
-  location.href="index.html";
+function openMainMenu() {
+  location.href = "index.html";
 }
-
 
 /**
  * This function load the onclick function for the buttons
  */
 
+function loadButtons() {
 
-function loadButtons(){
+  
 
   document.getElementById("btn-0").onclick = function () {
-    openProfile(1);
-
-    
+    openProfile(0);
   };
 
   document.getElementById("btn-1").onclick = function () {
-  openProfile(2);
+    openProfile(1);
   };
 
   document.getElementById("btn-2").onclick = function () {
-    openProfile(3);
+    openProfile(2);
   };
 
   document.getElementById("btn-3").onclick = function () {
-    openProfile(4);
+    openProfile(3);
   };
 
   document.getElementById("btn-4").onclick = function () {
-    openProfile(5);
+    openProfile(4);
   };
 
 
 }
 
-
-
-
-
 /**
- * In this function you can choose different areas from the doctor
+ * This function create the different areas for the doctors
  */
-
 
 function updateResults() {
 
-  let select_Menu = document.getElementById("select-menu");
-  let selectedValue = select_Menu.options[select_Menu.selectedIndex].value;
+  
 
-  if(selectedValue == "Allgemeinmedizin"){
+let speciality = document.getElementById("select-menu").value;
+
+ filteredDoctors = infoDoctor.filter(function(doctor){
+
+  return doctor.specialities.includes(speciality);
+});
+
+ document.getElementById("doctor-list").innerHTML = "";
+
+showDoctorCategory();
+
+
+if(speciality == "Alle Fachgebiete"){
+   document.getElementById("doctor-list").innerHTML = "";
+
+   showDoctorLists();
+
+
+}
+loadButtons();
+}
+
+
+
+/**
+ * This function create a list for all doctors
+ */
+
+function showDoctorLists() {
+
+  
+for(let i = 0; i < infoDoctor.length; i++){
+
+  DoctorList = createDoctorList(
+    infoDoctor[i].img,
+    infoDoctor[i].title,
+    infoDoctor[i].first_name,
+    infoDoctor[i].last_name,
+    infoDoctor[i].specialities,
+    infoDoctor[i].street,
+    infoDoctor[i].zipcode,
+    infoDoctor[i].city,
+    i
     
-    generalMedicine();
+  );
 
-  } else if(selectedValue == "Dermatologie"){
-    dermatology();
-  } else if(selectedValue == "Mund-Kiefer-Gesichtschirurgie"){
+  document.getElementById("doctor-list").insertAdjacentHTML("beforeend", DoctorList);
+}
 
-    surgery();
-
-  }else if(selectedValue == "Radiologie"){
-    radiology();
-
-  }else if(selectedValue == "Zahnmedizin"){
-    dentistry();
-
-  }else if(selectedValue == "Alle Fachgebiete"){
-
-    allSubject_areas();
   }
-}
-
-/**
- * Doctor with Area in Expertise general Medicine is displayed
- */
-
-function generalMedicine(){
-  document.getElementById("list-1").classList.remove("d-none");
-
-  document.getElementById("list-2").classList.remove("d-none");
-
-  document.getElementById("list-3").classList.add("d-none");
-
-  document.getElementById("list-4").classList.add("d-none");
-
-  document.getElementById("list-5").classList.add("d-none");
-
-}
-
-/**
- * Doctor with Area in Expertise general dermatology is displayed
- */
-
-function dermatology(){
-  document.getElementById("list-1").classList.remove("d-none");
-
-  document.getElementById("list-2").classList.add("d-none");
-
-  document.getElementById("list-3").classList.add("d-none");
-
-  document.getElementById("list-4").classList.add("d-none");
-
-  document.getElementById("list-5").classList.add("d-none");
-}
-
-/**
- * Doctor with Area in Expertise surgery is displayed
- */
-
-function surgery(){
-  document.getElementById("list-1").classList.add("d-none");
-
-  document.getElementById("list-2").classList.add("d-none");
-
-  document.getElementById("list-3").classList.add("d-none");
-
-  document.getElementById("list-4").classList.add("d-none");
-
-  document.getElementById("list-5").classList.remove("d-none");
-
-}
-
-/**
- * Doctor with Area in Expertise radiology is displayed
- */
-
-function radiology(){
-   document.getElementById("list-1").classList.add("d-none");
-
-   document.getElementById("list-2").classList.add("d-none");
-
-   document.getElementById("list-3").classList.add("d-none");
-
-   document.getElementById("list-4").classList.remove("d-none");
-
-   document.getElementById("list-5").classList.add("d-none");
-}
-
-/**
- * Doctor with Area in Expertise general dentistry is displayed
- */
-
-function dentistry(){
-   document.getElementById("list-1").classList.add("d-none");
-
-   document.getElementById("list-2").classList.add("d-none");
-
-   document.getElementById("list-3").classList.remove("d-none");
-
-   document.getElementById("list-4").classList.add("d-none");
-
-   document.getElementById("list-5").classList.remove("d-none");
-}
-
-/**
- * All doctors are displayed
- */
-
-function allSubject_areas(){
-  document.getElementById("list-1").classList.remove("d-none");
-
-  document.getElementById("list-2").classList.remove("d-none");
-
-  document.getElementById("list-3").classList.remove("d-none");
-
-  document.getElementById("list-4").classList.remove("d-none");
-
-  document.getElementById("list-5").classList.remove("d-none");
-}
-
-/**
- * In this function all doctors list are created on the website
- */
-
-
-function createAllDoctorLists(){
-
-   list1 = document.getElementById("list-1");
-   list2 = document.getElementById("list-2");
-   list3 = document.getElementById("list-3");
-   list4 = document.getElementById("list-4");
-   list5 = document.getElementById("list-5");
-  
-  DoctorList1();
-  DoctorList2();
-  DoctorList3();
-  DoctorList4();
-  DoctorList5();
-
-  loadButtons();
-  
-
-}
 
 
 
+  /**
+   * This function show all doctors from one category
+   */
+function showDoctorCategory() {
+  for (let i = 0; i < filteredDoctors.length; i++) {
+    DoctorList = createDoctorList(
+      filteredDoctors[i].img,
+      filteredDoctors[i].title,
+      filteredDoctors[i].first_name,
+      filteredDoctors[i].last_name,
+      filteredDoctors[i].specialities,
+      filteredDoctors[i].street,
+      filteredDoctors[i].zipcode,
+      filteredDoctors[i].city,
+      i
+    );
+
+    document
+      .getElementById("doctor-list")
+      .insertAdjacentHTML("beforeend", DoctorList);
+  }
+}  
 
 
 /**
- * This function create a list for the first doctor
+ * This function create an array of specialites
  */
 
-function DoctorList1() { 
-  
-  DoctorList = createDoctorList(
-    infoDoctor[0].img,
-    infoDoctor[0].title,
-    infoDoctor[0].first_name,
-    infoDoctor[0].last_name,
-    infoDoctor[0].specialities,
-    infoDoctor[0].street,
-    infoDoctor[0].zipcode,
-    infoDoctor[0].city,
-    i = 0
-  );
+function generateSpecialities() {
 
-   list1.insertAdjacentHTML("beforeend", DoctorList);
+  infoDoctor.forEach(function(doctor){
+
+    doctor.specialities.forEach(function(speciality){
+
+
+      if(!specialities.includes(speciality)){
+        specialities.push(speciality);
+      }
+    });
+  });
+}
+
+/**
+ * This function show all speciality in the dropdown menu
+ */
+
+function showSpeciality(){
+
+  for(let i = 0; i < specialities.length; i++){
+
+    dropdownSpeciality = createSpeciality(
+
+      specialities[i] );
+
+       document
+         .getElementById("select-menu")
+         .insertAdjacentHTML("beforeend", dropdownSpeciality);
+
+
+  }
+
 
 }
 
 
 /**
- * This function create a list for the second doctor
+ * This function create different option elements, which will be displayd in the dropdown menu
+ * @param {string} Speciality - parameter to show the different speciality
  */
 
-function DoctorList2() {
+function createSpeciality(Speciality) {
+ 
+  let dropdownSpeciality = `<option>${Speciality}</option>`;
 
-  DoctorList = createDoctorList(
-    infoDoctor[1].img,
-    infoDoctor[1].title,
-    infoDoctor[1].first_name,
-    infoDoctor[1].last_name,
-    infoDoctor[1].specialities,
-    infoDoctor[1].street,
-    infoDoctor[1].zipcode,
-    infoDoctor[1].city,
-    i = 1
-  );
-   list2.insertAdjacentHTML("beforeend", DoctorList);
+  return dropdownSpeciality;
+
 }
 
-/**
- * This function create a list for the third doctor
+ /**
+ * This function create the DoctorList, which one is used to create the individual list for the different doctors in the index html file
+ * @param {string} picture_url - parameter for the picture source
+ * @param {string} title - parameter for the title from the doctor
+ * @param {string} first_name - parameter for the first name from the doctor
+ * @param {string} last_name - parameter for the last name from the doctor 
+ * @param {string} specialities - parameter for the different specialities from the doctor 
+ * @param {string} street - parameter for the streetname
+ * @param {number} zipcode - number for the zipcode
+ * @param {string} city - parameter for the cityname
+ * @param {number} i - number create different id´s
  */
 
-function DoctorList3() {
-  i = 2;
-  DoctorList = createDoctorList(
-    infoDoctor[2].img,
-    infoDoctor[2].title,
-    infoDoctor[2].first_name,
-    infoDoctor[2].last_name,
-    infoDoctor[2].specialities,
-    infoDoctor[2].street,
-    infoDoctor[2].zipcode,
-    infoDoctor[2].city,
-    i = 2
-  );
-   list3.insertAdjacentHTML("beforeend", DoctorList);
-}
-
-/**
- * This function create a list for the fourth doctor
- */
-
-function DoctorList4() {
-  i = 3;
-  DoctorList = createDoctorList(
-    infoDoctor[3].img,
-    infoDoctor[3].title,
-    infoDoctor[3].first_name,
-    infoDoctor[3].last_name,
-    infoDoctor[3].specialities,
-    infoDoctor[3].street,
-    infoDoctor[3].zipcode,
-    infoDoctor[3].city,
-    i = 3
-  );
-   list4.insertAdjacentHTML("beforeend", DoctorList);
-}
-
-/**
- * This function create a list for the fifth doctor
- */
-
-function DoctorList5() {
-  
-  DoctorList = createDoctorList(
-    infoDoctor[4].img,
-    infoDoctor[4].title,
-    infoDoctor[4].first_name,
-    infoDoctor[4].last_name,
-    infoDoctor[4].specialities,
-    infoDoctor[4].street,
-    infoDoctor[4].zipcode,
-    infoDoctor[4].city,
-    i = 4
-  );
-   list5.insertAdjacentHTML("beforeend", DoctorList);
-}
-
-/**
- * This function create the DoctorList, which one is used to create the individual list for the different doctors
- */
-
-
-function createDoctorList(picture_url ,title, first_name, last_name, specialities, street, zipcode, city,i) {
-
-  
-  let DoctorList = `<li class="main-menu-list">
+function createDoctorList(
+  picture_url,
+  title,
+  first_name,
+  last_name,
+  specialities,
+  street,
+  zipcode,
+  city,
+  i
+) {
+  let DoctorList = `<li id="${first_name + "-" + last_name}" class="main-menu-list">
       <img class="img-Doctor" src="DoctorDatabase/${picture_url}">
       <div class="Doctor-DIV">
-      <h2> ${title + '&nbsp' + first_name + '&nbsp'+ last_name}</h2>
+      <h2> ${title + "&nbsp" + first_name + "&nbsp" + last_name}</h2>
       <h3> Fachgebiete: ${specialities}</h3>
-      <h4>${street} <br> ${zipcode + '&nbsp' + city}</h4>
+      <h4>${street} <br> ${zipcode + "&nbsp" + city}</h4>
       </div>
 
       <button  id="btn-${i}" type="button" class="btn btn-info">Profil anzeigen</button>
-  </li>`;
 
- 
+  </li> 
+  <br>`;
 
   return DoctorList;
-  
 }
-
-
-
-
-
 
 /**
  * Load AllDoctorList - JSON from Server
@@ -442,7 +245,10 @@ function load() {
       //then(function (variable vom server))
       console.log("Laden erfolgreich!", result);
       infoDoctor = JSON.parse(result);
-       createAllDoctorLists();
+       showDoctorLists();
+       loadButtons();
+       generateSpecialities();
+      showSpeciality();
     })
     .catch(function (error) {
       // Fehler
@@ -450,41 +256,41 @@ function load() {
     });
 }
 
-
-
 /**
  * Loads a JSON or JSON Array to the Server
  * payload {JSON | Array} - The payload you want to store
  */
 function loadJSONFromServer() {
-  
   return new Promise(function (resolve, reject) {
     let xhttp = new XMLHttpRequest();
     let proxy = determineProxySettings();
     let serverURL = proxy + BASE_SERVER_URL + "get_doctors.php";
-    xhttp.open("GET", serverURL);
+    xhttp.open("GET", serverURL); 
 
     xhttp.onreadystatechange = function (oEvent) {
       if (xhttp.readyState === 4) {
-        if (xhttp.status >= 200 && xhttp.status <= 399) {
-          resolve(xhttp.responseText);
+        let response = JSON.parse(xhttp.responseText);
+        if (response.status >= 200 || response.status <= 399) {
+          reject(response.error);
         } else {
-          reject(xhttp.statusText);
+          resolve(xhttp.responseText);
         }
-
+        //if (xhttp.status >= 200 && xhttp.status <= 399) {
+        //resolve(xhttp.responseText);
+        //} else {
+        //  reject(xhttp.statusText);
+        //}
       }
     };
 
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send();
   });
-  
 }
 
 /**
  * Function create Setting for the Proxy Server
  */
-
 
 function determineProxySettings() {
   if (window.location.href.indexOf(".developerakademie.com") > -1) {

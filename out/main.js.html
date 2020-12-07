@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BASE_SERVER_URL =
+  "http://sebastian-netzker.developerakademie.com/Bewerberaufgabe/DoctorDatabase/";
+
+let infoDoctor = [];
+
+
+/**
+ * This function add parameter after the url
+ * @param {number} id - number, for the different doctors
+ */
+
+function openProfile(id) {
+  window.location.href = "./profile.html?id=" + id;
+}
+
+/**
+ * This function open the Main Menu
+ */
+
+function openMainMenu() {
+  location.href = "index.html";
+}
+
+/**
+ * This function load the onclick function for the buttons
+ */
+
+function loadButtons() {
+  document.getElementById("btn-0").onclick = function () {
+    openProfile(0);
+  };
+
+  document.getElementById("btn-1").onclick = function () {
+    openProfile(1);
+  };
+
+  document.getElementById("btn-2").onclick = function () {
+    openProfile(2);
+  };
+
+  document.getElementById("btn-3").onclick = function () {
+    openProfile(3);
+  };
+
+  document.getElementById("btn-4").onclick = function () {
+    openProfile(4);
+  };
+}
+
+/**
+ * In this function you can choose different areas from the doctor
+ */
+
+function updateResults() {
+  let select_Menu = document.getElementById("select-menu");
+  let selectedValue = select_Menu.options[select_Menu.selectedIndex].value;
+
+  if (selectedValue == "Allgemeinmedizin") {
+    generalMedicine();
+  } else if (selectedValue == "Dermatologie") {
+    dermatology();
+  } else if (selectedValue == "Mund-Kiefer-Gesichtschirurgie") {
+    surgery();
+  } else if (selectedValue == "Radiologie") {
+    radiology();
+  } else if (selectedValue == "Zahnmedizin") {
+    dentistry();
+  } else if (selectedValue == "Alle Fachgebiete") {
+    allSubject_areas();
+  }
+}
+
+/**
+ * Doctor with Area in Expertise general Medicine is displayed
+ */
+
+function generalMedicine() {
+
+  document.getElementById("Anton-Kraus").classList.remove("d-none");
+
+  document.getElementById("Christina-Miller").classList.remove("d-none");
+
+  document.getElementById("Eberhard-Olenberger").classList.add("d-none");
+
+  document.getElementById("Klara-Weber").classList.add("d-none");
+
+  document.getElementById("Sonja-Anette-Huber").classList.add("d-none");
+
+  }
+
+/**
+ * Doctor with Area in Expertise general dermatology is displayed
+ */
+
+function dermatology() {
+  document.getElementById("Anton-Kraus").classList.remove("d-none");
+
+  document.getElementById("Christina-Miller").classList.add("d-none");
+
+  document.getElementById("Eberhard-Olenberger").classList.add("d-none");
+
+  document.getElementById("Klara-Weber").classList.add("d-none");
+
+  document.getElementById("Sonja-Anette-Huber").classList.add("d-none");
+}
+
+/**
+ * Doctor with Area in Expertise surgery is displayed
+ */
+
+function surgery() {
+  document.getElementById("Anton-Kraus").classList.add("d-none");
+
+  document.getElementById("Christina-Miller").classList.add("d-none");
+
+  document.getElementById("Eberhard-Olenberger").classList.add("d-none");
+
+  document.getElementById("Klara-Weber").classList.add("d-none");
+
+  document.getElementById("Sonja-Anette-Huber").classList.remove("d-none");
+}
+
+/**
+ * Doctor with Area in Expertise radiology is displayed
+ */
+
+function radiology() {
+  document.getElementById("Anton-Kraus").classList.add("d-none");
+
+  document.getElementById("Christina-Miller").classList.add("d-none");
+
+  document.getElementById("Eberhard-Olenberger").classList.add("d-none");
+
+  document.getElementById("Klara-Weber").classList.remove("d-none");
+
+  document.getElementById("Sonja-Anette-Huber").classList.add("d-none");
+}
+
+/**
+ * Doctor with Area in Expertise general dentistry is displayed
+ */
+
+function dentistry() {
+  document.getElementById("Anton-Kraus").classList.add("d-none");
+
+  document.getElementById("Christina-Miller").classList.add("d-none");
+
+  document.getElementById("Eberhard-Olenberger").classList.remove("d-none");
+
+  document.getElementById("Klara-Weber").classList.add("d-none");
+
+  document.getElementById("Sonja-Anette-Huber").classList.remove("d-none");
+}
+
+/**
+ * All doctors are displayed
+ */
+
+function allSubject_areas() {
+  document.getElementById("Anton-Kraus").classList.remove("d-none");
+
+  document.getElementById("Christina-Miller").classList.remove("d-none");
+
+  document.getElementById("Eberhard-Olenberger").classList.remove("d-none");
+
+  document.getElementById("Klara-Weber").classList.remove("d-none");
+
+  document.getElementById("Sonja-Anette-Huber").classList.remove("d-none");
+}
+
+
+
+
+/**
+ * This function create a list for all doctors
+ */
+
+function showDoctorLists() {
+
+for(let i = 0; i &lt; infoDoctor.length; i++){
+
+  DoctorList = createDoctorList(
+    infoDoctor[i].img,
+    infoDoctor[i].title,
+    infoDoctor[i].first_name,
+    infoDoctor[i].last_name,
+    infoDoctor[i].specialities,
+    infoDoctor[i].street,
+    infoDoctor[i].zipcode,
+    infoDoctor[i].city,
+    i
+    
+  );
+
+  document.getElementById("doctor-list").insertAdjacentHTML("beforeend", DoctorList);
+}
+
+  }
+
+ /**
+ * This function create the DoctorList, which one is used to create the individual list for the different doctors in the index html file
+ * @param {string} picture_url - parameter for the picture source
+ * @param {string} title - parameter for the title from the doctor
+ * @param {string} first_name - parameter for the first name from the doctor
+ * @param {string} last_name - parameter for the last name from the doctor 
+ * @param {string} specialities - parameter for the different specialities from the doctor 
+ * @param {string} street - parameter for the streetname
+ * @param {number} zipcode - number for the zipcode
+ * @param {string} city - parameter for the cityname
+ * @param {number} i - number create different id´s
+ */
+
+function createDoctorList(
+  picture_url,
+  title,
+  first_name,
+  last_name,
+  specialities,
+  street,
+  zipcode,
+  city,
+  i
+) {
+  let DoctorList = `&lt;li id="${first_name + "-" + last_name}" class="main-menu-list">
+      &lt;img class="img-Doctor" src="DoctorDatabase/${picture_url}">
+      &lt;div class="Doctor-DIV">
+      &lt;h2> ${title + "&amp;nbsp" + first_name + "&amp;nbsp" + last_name}&lt;/h2>
+      &lt;h3> Fachgebiete: ${specialities}&lt;/h3>
+      &lt;h4>${street} &lt;br> ${zipcode + "&amp;nbsp" + city}&lt;/h4>
+      &lt;/div>
+
+      &lt;button  id="btn-${i}" type="button" class="btn btn-info">Profil anzeigen&lt;/button>
+
+  &lt;/li> 
+  &lt;br>`;
+
+  return DoctorList;
+}
+
+/**
+ * Load AllDoctorList - JSON from Server
+ */
+function load() {
+  loadJSONFromServer()
+    .then(function (result) {
+      //then(function (variable vom server))
+      console.log("Laden erfolgreich!", result);
+      infoDoctor = JSON.parse(result);
+       showDoctorLists();
+       loadButtons();
+    })
+    .catch(function (error) {
+      // Fehler
+      console.error("Fehler beim laden!", error);
+    });
+}
+
+/**
+ * Loads a JSON or JSON Array to the Server
+ * payload {JSON | Array} - The payload you want to store
+ */
+function loadJSONFromServer() {
+  return new Promise(function (resolve, reject) {
+    let xhttp = new XMLHttpRequest();
+    let proxy = determineProxySettings();
+    let serverURL = proxy + BASE_SERVER_URL + "get_doctors.php";
+    xhttp.open("GET", serverURL); 
+
+    xhttp.onreadystatechange = function (oEvent) {
+      if (xhttp.readyState === 4) {
+        let response = JSON.parse(xhttp.responseText);
+        if (response.status >= 200 || response.status &lt;= 399) {
+          reject(response.error);
+        } else {
+          resolve(xhttp.responseText);
+        }
+        //if (xhttp.status >= 200 &amp;&amp; xhttp.status &lt;= 399) {
+        //resolve(xhttp.responseText);
+        //} else {
+        //  reject(xhttp.statusText);
+        //}
+      }
+    };
+
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send();
+  });
+}
+
+/**
+ * Function create Setting for the Proxy Server
+ */
+
+function determineProxySettings() {
+  if (window.location.href.indexOf(".developerakademie.com") > -1) {
+    return "";
+  } else {
+    return "https://cors-anywhere.herokuapp.com/";
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#allSubject_areas">allSubject_areas</a></li><li><a href="global.html#createDoctorInfo">createDoctorInfo</a></li><li><a href="global.html#createDoctorList">createDoctorList</a></li><li><a href="global.html#createOpeningHours">createOpeningHours</a></li><li><a href="global.html#dentistry">dentistry</a></li><li><a href="global.html#dermatology">dermatology</a></li><li><a href="global.html#determineProxySettings">determineProxySettings</a></li><li><a href="global.html#generalMedicine">generalMedicine</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#loadButtons">loadButtons</a></li><li><a href="global.html#loadDoctor">loadDoctor</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#openMainMenu">openMainMenu</a></li><li><a href="global.html#openProfile">openProfile</a></li><li><a href="global.html#radiology">radiology</a></li><li><a href="global.html#showDoctorInfo">showDoctorInfo</a></li><li><a href="global.html#showDoctorLists">showDoctorLists</a></li><li><a href="global.html#showOpeningHours">showOpeningHours</a></li><li><a href="global.html#surgery">surgery</a></li><li><a href="global.html#updateResults">updateResults</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 02 2020 10:31:42 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

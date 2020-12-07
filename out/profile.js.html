@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * This function create parameter after the existing url
+ */
+function loadDoctor() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const id = urlParams.get("id");
+
+  loadJSONFromServer()
+    .then(function (result) {
+      //then(function (variable vom server))
+      console.log("Laden erfolgreich!", result);
+      infoDoctor = JSON.parse(result); // Array with all doctors
+      showDoctorInfo(id);
+      showOpeningHours(id);
+    })
+    .catch(function (error) {
+      // Fehler
+      console.error("Fehler beim laden!", error);
+    });
+
+  
+}
+
+
+/**
+ * This function create the Doctor Info, which one create the different list for the different doctors in the profile html file
+ * @param {string} picture_url - parameter for the picture source
+ * @param {string} title  - parameter for the title from the doctor
+ * @param {string} first_name - parameter for the  first name from the doctor
+ * @param {string} last_name - parameter for the last name from the doctor
+ * @param {string} specialities - parameter for the different specialities from the doctor
+ * @param {string} street  - parameter for the streetname
+ * @param {number} zipcode - number for the zipcode
+ * @param {string} city  - parameter for the cityname
+ */
+
+function createDoctorInfo(
+  picture_url,
+  title,
+  first_name,
+  last_name,
+  specialities,
+  street,
+  zipcode,
+  city
+) {
+  let DoctorInfo = `&lt;li>
+      &lt;img class="img-Doctor" src="DoctorDatabase/${picture_url}">
+      &lt;div class="Doctor-DIV">
+      &lt;h2> ${title + "&amp;nbsp" + first_name + "&amp;nbsp" + last_name}&lt;/h2>
+      &lt;h3> Fachgebiete: ${specialities}&lt;/h3>
+      &lt;h4>${street} &lt;br> ${zipcode + "&amp;nbsp" + city}&lt;/h4>
+      &lt;/div>
+  &lt;/li>`;
+
+  return DoctorInfo;
+}
+
+/**
+ * This function create the different opening hours for the doctors
+ * @param {number} Monday - Opening hours from monday
+ * @param {number} Tuesday - Opening hours from tuesday
+ * @param {number} Wednesday - Opening hours from wednesday
+ * @param {number} Thursday - Opening hours from thursday
+ * @param {number} Friday - Opening hours from friday
+ * @param {number} Saturday - Opening hours from saturday
+ * @param {number} Sunday - Opening hours from sunday
+ */
+
+function createOpeningHours(
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+) {
+  let OpeningHours = `&lt;li class="li-opening-hours">
+    &lt;h2 class="h2-opening-hours">Öffnungszeiten&lt;/h2>
+     &lt;div class="div-opening-hours-1">
+      &lt;div class="div-opening-hours-2">
+
+       &lt;span>Mo &lt;p> ${Monday}&lt;/p>&lt;/span>
+       &lt;span>Di &lt;p> ${Tuesday}&lt;/p>&lt;/span>
+       &lt;span>Mi &lt;p> ${Wednesday}&lt;/p>&lt;/span>
+       &lt;span>Do &lt;p> ${Thursday}&lt;/p>&lt;/span>
+       &lt;span>Fr &lt;p> ${Friday}&lt;/p>&lt;/span>
+       &lt;span>Sa &lt;p> ${Saturday}&lt;/p>&lt;/span>
+       &lt;span>So &lt;p> ${Sunday}&lt;/p>&lt;/span>&lt;/div>
+
+      &lt;/div>
+      &lt;/div>
+
+    &lt;/li>`;
+
+  return OpeningHours;
+}
+
+
+/**
+ * This function show the Opening Hours from the perspective doctor
+ * @param {number} id - number, which search after the right doctor
+ */
+
+function showOpeningHours(id) {
+ let openingHours = createOpeningHours(
+    infoDoctor[id].opening_hours.monday,
+    infoDoctor[id].opening_hours.tuesday,
+    infoDoctor[id].opening_hours.wednesday,
+    infoDoctor[id].opening_hours.thursday,
+    infoDoctor[id].opening_hours.friday,
+    infoDoctor[id].opening_hours.saturday,
+    infoDoctor[id].opening_hours.sunday
+  );
+
+  document.getElementById("opening-hours").innerHTML = "";
+
+  document.getElementById("opening-hours").insertAdjacentHTML("beforeend", openingHours);
+}
+
+
+/**
+ * This function show the Doctor Info from the perspective doctor
+ * @param {number} id - number, which search after the right doctor
+ */
+
+function showDoctorInfo(id) {
+  doctorInfo = createDoctorInfo(
+    infoDoctor[id].img,
+    infoDoctor[id].title,
+    infoDoctor[id].first_name,
+    infoDoctor[id].last_name,
+    infoDoctor[id].specialities,
+    infoDoctor[id].street,
+    infoDoctor[id].zipcode,
+    infoDoctor[id].city
+  );
+document.getElementById("doctor-info").innerHTML = '';
+  document
+    .getElementById("doctor-info")
+    .insertAdjacentHTML("beforeend", doctorInfo);
+}
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#allSubject_areas">allSubject_areas</a></li><li><a href="global.html#createDoctorInfo">createDoctorInfo</a></li><li><a href="global.html#createDoctorList">createDoctorList</a></li><li><a href="global.html#createOpeningHours">createOpeningHours</a></li><li><a href="global.html#dentistry">dentistry</a></li><li><a href="global.html#dermatology">dermatology</a></li><li><a href="global.html#determineProxySettings">determineProxySettings</a></li><li><a href="global.html#generalMedicine">generalMedicine</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#loadButtons">loadButtons</a></li><li><a href="global.html#loadDoctor">loadDoctor</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#openMainMenu">openMainMenu</a></li><li><a href="global.html#openProfile">openProfile</a></li><li><a href="global.html#radiology">radiology</a></li><li><a href="global.html#showDoctorInfo">showDoctorInfo</a></li><li><a href="global.html#showDoctorLists">showDoctorLists</a></li><li><a href="global.html#showOpeningHours">showOpeningHours</a></li><li><a href="global.html#surgery">surgery</a></li><li><a href="global.html#updateResults">updateResults</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 02 2020 10:31:42 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
