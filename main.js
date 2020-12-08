@@ -26,36 +26,8 @@ function openMainMenu() {
   location.href = "index.html";
 }
 
-/**
- * This function load the onclick function for the buttons
- */
-
-function loadButtons() {
-
-  
-
-  document.getElementById("btn-0").onclick = function () {
-    openProfile(0);
-  };
-
-  document.getElementById("btn-1").onclick = function () {
-    openProfile(1);
-  };
-
-  document.getElementById("btn-2").onclick = function () {
-    openProfile(2);
-  };
-
-  document.getElementById("btn-3").onclick = function () {
-    openProfile(3);
-  };
-
-  document.getElementById("btn-4").onclick = function () {
-    openProfile(4);
-  };
 
 
-}
 
 /**
  * This function create the different areas for the doctors
@@ -81,10 +53,7 @@ if(speciality == "Alle Fachgebiete"){
    document.getElementById("doctor-list").innerHTML = "";
 
    showDoctorLists();
-
-
 }
-loadButtons();
 }
 
 
@@ -107,7 +76,7 @@ for(let i = 0; i < infoDoctor.length; i++){
     infoDoctor[i].street,
     infoDoctor[i].zipcode,
     infoDoctor[i].city,
-    i
+    infoDoctor[i].id,
     
   );
 
@@ -132,7 +101,8 @@ function showDoctorCategory() {
       filteredDoctors[i].street,
       filteredDoctors[i].zipcode,
       filteredDoctors[i].city,
-      i
+      filteredDoctors[i].id,
+      
     );
 
     document
@@ -228,7 +198,7 @@ function createDoctorList(
       <h4>${street} <br> ${zipcode + "&nbsp" + city}</h4>
       </div>
 
-      <button  id="btn-${i}" type="button" class="btn btn-info">Profil anzeigen</button>
+      <button onclick="openProfile(${i})"  id="btn-${i}" type="button" class="btn btn-info">Profil anzeigen</button>
 
   </li> 
   <br>`;
@@ -246,7 +216,6 @@ function load() {
       console.log("Laden erfolgreich!", result);
       infoDoctor = JSON.parse(result);
        showDoctorLists();
-       loadButtons();
        generateSpecialities();
       showSpeciality();
     })

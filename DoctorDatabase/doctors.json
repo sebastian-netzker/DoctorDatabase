@@ -16,7 +16,8 @@
             "friday": "08:00 - 14:00",
             "saturday": "closed",
             "sunday": "closed"
-        }
+        },
+        "id":"0"
     },
     {
         "title": "Dr. med.",
@@ -35,7 +36,8 @@
             "friday": "08:00 - 14:00",
             "saturday": "closed",
             "sunday": "closed"
-        }
+        },
+        "id":"1"
     },
     {
         "title": "Dr. med. dent.",
@@ -54,7 +56,8 @@
             "friday": "08:00 - 14:00",
             "saturday": "closed",
             "sunday": "closed"
-        }
+        },
+        "id":"2"
     },
     {
         "title": "",
@@ -73,7 +76,8 @@
             "friday": "08:00 - 14:00",
             "saturday": "closed",
             "sunday": "closed"
-        }
+        },
+        "id":"3"
     },
     {
         "title": "Univ-Prof. Dr. med. dent. Dr. hc.",
@@ -92,7 +96,8 @@
             "friday": "08:00 - 14:00",
             "saturday": "closed",
             "sunday": "closed"
-        }
+        },
+        "id":"4"
     }
 
 ]
